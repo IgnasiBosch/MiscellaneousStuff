@@ -124,7 +124,8 @@
 
 	# Detect copies as well as renames
 	renames = copies
-	tool = vimdiff
+	# tool = vimdiff
+        tool = intellij
 
 [difftool "intellij"]
 	cmd = PATH/TO/idea.sh diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
@@ -142,6 +143,7 @@
 
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
+	tool = intellij
 
 [push]
 

@@ -126,6 +126,13 @@
 	renames = copies
 	tool = vimdiff
 
+[difftool "intellij"]
+	cmd = PATH/TO/idea.sh diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
+
+[mergetool "intellij"]
+	cmd = PATH/TO/idea.sh merge $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE") $(cd $(dirname "$BASE") && pwd)/$(basename "$BASE") $(cd $(dirname "$MERGED") && pwd)/$(basename "$MERGED")
+	trustExitCode = false
+
 [help]
 
 	# Automatically correct and execute mistyped commands
@@ -177,3 +184,8 @@
 	helper = cache --timeout=3600
 [http]
 	postBuffer = 524288000
+	
+[mergetool]
+	keepBackup = false
+[difftool]
+	prompt = false

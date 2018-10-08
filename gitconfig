@@ -1,3 +1,23 @@
+
+[user]
+        # 
+	# You must use your github's email and name
+	email = your@email.com
+	name = Your Name
+
+[difftool "intellij"]
+	# 
+	# You must use your PATH/TO idea
+	cmd = PATH/TO/idea.sh diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
+
+[mergetool "intellij"]
+	# 
+	# You must use your PATH/TO idea
+	cmd = PATH/TO/idea.sh merge $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE") $(cd $(dirname "$BASE") && pwd)/$(basename "$BASE") $(cd $(dirname "$MERGED") && pwd)/$(basename "$MERGED")
+	trustExitCode = false
+
+
+
 [alias]
 
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
@@ -126,14 +146,6 @@
 	renames = copies
 	# tool = vimdiff
         tool = intellij
-
-[difftool "intellij"]
-	cmd = PATH/TO/idea.sh diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
-
-[mergetool "intellij"]
-	cmd = PATH/TO/idea.sh merge $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE") $(cd $(dirname "$BASE") && pwd)/$(basename "$BASE") $(cd $(dirname "$MERGED") && pwd)/$(basename "$MERGED")
-	trustExitCode = false
-
 [help]
 
 	# Automatically correct and execute mistyped commands
@@ -176,10 +188,6 @@
 	insteadOf = "gist:"
 [rebase]
 	autostash = true
-
-[user]
-	email = your@email.com
-	name = Your Name
 [merge]
 	tool = vimdiff
 [credential]

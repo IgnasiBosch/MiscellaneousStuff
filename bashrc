@@ -79,14 +79,26 @@ alias git-update='git stash save tmp$(date +"%Y%m%d%H%M"); git pull --rebase; gi
 alias phpx='PXDEBUG_CONFIG="idekey=PHPSTORM" PHP_IDE_CONFIG="serverName=VagrantXdebug" php -dxdebug.remote_host=10.12.6.92'   
  
 function parse_git_branch () {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1/'
 }
  
 function parse_git_repo() {
     git remote -v 2> /dev/null | sed -e '/push/!d' -e '/origin/!d' -e 's/.*\/\(.*\).git .*/(\1: /'
 }
+
+function dirty(){
+if [ -e ".git" ];then
+    if [[ $(git status --porcelain)  ]];
+        then 
+	    echo -e -n '\033[1;31m'; 
+        else 
+            echo -e -n '\033[1;32m' 
+    fi
+fi
+}
+
  
-PS1='\[\033[1;31m\][\[\033[1;33m\]\u\[\033[1;31m\]:\[\033[1;36m\]\W\[\033[1;31m\]]$(parse_git_branch) \[\033[00m\]\$\[\033[00m\] '
+PS1='\[\033[1;31m\][\[\033[1;33m\]\u\[\033[1;31m\]:\[\033[1;36m\]\W\[\033[1;31m\]]$(dirty)$(parse_git_branch) \[\033[00m\]\$\[\033[00m\] '
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
